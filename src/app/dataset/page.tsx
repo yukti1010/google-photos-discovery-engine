@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import corpusData from "@/data/corpus.json";
-import { Sparkles, ArrowRight, ShieldAlert, Search, Filter, Layers, Database } from "lucide-react";
+import { Sparkles, ArrowRight, Search } from "lucide-react";
 
 export default function DiscoveryEngine() {
   const [selectedTheme, setSelectedTheme] = useState<string>("All");
@@ -40,7 +40,7 @@ export default function DiscoveryEngine() {
 
       <div className="max-w-6xl mx-auto px-6 pt-10 space-y-12">
         {/* Hero Section */}
-        <section className="space-y-4 max-w-4xl">
+        <section id="overview" className="space-y-4 max-w-4xl scroll-mt-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold">
             <Sparkles className="w-3.5 h-3.5" /> Discovery Engine · Public Signal Synthesis
           </div>
@@ -74,7 +74,7 @@ export default function DiscoveryEngine() {
         </section>
 
         {/* Section 1: Methodology Pipeline */}
-        <section className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+        <section id="pipeline" className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm space-y-6 scroll-mt-6">
           <div>
             <p className="text-xs font-bold text-blue-600 uppercase tracking-wider">Methodology</p>
             <h2 className="text-xl font-bold text-slate-900">Seven stages, not one sentiment pass</h2>
@@ -137,17 +137,16 @@ export default function DiscoveryEngine() {
         </section>
 
         {/* Section 2: Opportunity Scoring & Ranking */}
-        <section className="space-y-6">
+        <section id="ranking" className="space-y-6 scroll-mt-6">
           <div>
             <p className="text-xs font-bold text-blue-600 uppercase tracking-wider">Opportunity Ranking</p>
             <h2 className="text-2xl font-bold text-slate-900">Prioritizing What Can Actually Be Solved</h2>
             <p className="text-xs text-slate-500 mt-1 max-w-3xl">
-              Ranked not by raw volume, but by a 5-factor scoring model: Prevalence $\times$ Pain Severity $\times$ Multi-Source Corroboration $\times$ Product Addressability without manual file tagging.
+              Ranked by a 5-factor scoring model: Prevalence $\times$ Pain Severity $\times$ Multi-Source Corroboration $\times$ Product Addressability without manual file tagging.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Blocker 1 */}
             <div className="bg-white border-2 border-blue-500 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -156,7 +155,7 @@ export default function DiscoveryEngine() {
                 </div>
                 <h3 className="text-lg font-bold text-slate-900">Bridge Episodic-Semantic Disconnect</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Users search with story-like, multi-cue descriptions ("blue dress at wedding"), but the engine matches literal isolated nouns, burying results under hundreds of false positives.
+                  Users search with narrative descriptions ("blue dress at wedding"), but the engine matches literal isolated nouns, burying results under false positives.
                 </p>
                 <div className="grid grid-cols-2 gap-2 text-[11px] pt-3 border-t border-slate-100 text-slate-500">
                   <div>Prevalence: <strong className="text-slate-800">41.2%</strong></div>
@@ -170,7 +169,6 @@ export default function DiscoveryEngine() {
               </div>
             </div>
 
-            {/* Blocker 2 */}
             <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -179,7 +177,7 @@ export default function DiscoveryEngine() {
                 </div>
                 <h3 className="text-lg font-bold text-slate-900">High-Urgency Physical & Utility Docs</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Prescriptions, appliance labels, breaker boxes, and parking slips lack OCR clarity and get buried beneath burst photos and daily camera roll clutter.
+                  Prescriptions, appliance labels, breaker boxes, and parking slips lack OCR clarity and get buried beneath daily camera roll clutter.
                 </p>
                 <div className="grid grid-cols-2 gap-2 text-[11px] pt-3 border-t border-slate-100 text-slate-500">
                   <div>Prevalence: <strong className="text-slate-800">28.6%</strong></div>
@@ -193,7 +191,6 @@ export default function DiscoveryEngine() {
               </div>
             </div>
 
-            {/* Blocker 3 */}
             <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -202,7 +199,7 @@ export default function DiscoveryEngine() {
                 </div>
                 <h3 className="text-lg font-bold text-slate-900">Life-Milestone Relational Timelines</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Users remember temporal context through autobiographical anchors ("right after college", "when my dog was a puppy"), not strict calendar years.
+                  Users remember temporal context through autobiographical anchors ("right after college", "when puppy was small"), not calendar years.
                 </p>
                 <div className="grid grid-cols-2 gap-2 text-[11px] pt-3 border-t border-slate-100 text-slate-500">
                   <div>Prevalence: <strong className="text-slate-800">19.4%</strong></div>
@@ -219,7 +216,7 @@ export default function DiscoveryEngine() {
         </section>
 
         {/* Section 3: Evidence Explorer */}
-        <section className="space-y-4">
+        <section id="evidence" className="space-y-4 scroll-mt-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <p className="text-xs font-bold text-blue-600 uppercase tracking-wider">Inspectable Evidence</p>
@@ -258,7 +255,7 @@ export default function DiscoveryEngine() {
           {/* Filtered Evidence Cards */}
           <div className="space-y-3 pt-2">
             {filteredItems.map((item: any) => (
-              <div key={item.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3 transition-hover hover:border-slate-300">
+              <div key={item.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
                     <span className="font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md">{item.category}</span>
