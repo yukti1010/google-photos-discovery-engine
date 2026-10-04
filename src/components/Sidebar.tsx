@@ -2,27 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  Sparkles, 
-  BarChart3, 
-  Search, 
-  Layers, 
-  CheckCircle2, 
-  Compass, 
-  HelpCircle,
-  FolderGit2
-} from "lucide-react";
+import { Sparkles, BarChart3, Search, Layers, CheckCircle2, Compass } from "lucide-react";
 import corpusData from "@/data/corpus.json";
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   const navItems = [
-    { name: "Overview & Synthesis", href: "/", icon: Sparkles },
-    { name: "Evidence Explorer", href: "/dataset", icon: Search },
-    { name: "Opportunity Ranking", href: "/#ranking", icon: Layers },
+    { name: "Overview & Synthesis", href: "/dataset#overview", icon: Sparkles },
+    { name: "Evidence Explorer", href: "/dataset#evidence", icon: Search },
+    { name: "Opportunity Ranking", href: "/dataset#ranking", icon: Layers },
+    { name: "Methodology & Pipeline", href: "/dataset#pipeline", icon: Compass },
     { name: "Metric Decomposition", href: "/metric", icon: BarChart3 },
-    { name: "Methodology & Pipeline", href: "/#pipeline", icon: Compass },
   ];
 
   const uniqueSources = Array.from(new Set(corpusData.map((i: any) => i.source)));
@@ -37,18 +28,24 @@ export default function Sidebar() {
               R
             </div>
             <div>
-              <span className="font-extrabold tracking-tight text-white text-base">Retrieval<span className="text-blue-400 italic">Lens</span></span>
-              <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">Google Photos PM Intelligence</p>
+              <span className="font-extrabold tracking-tight text-white text-base">
+                Retrieval<span className="text-blue-400 italic">Lens</span>
+              </span>
+              <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">
+                Google Photos PM Intelligence
+              </p>
             </div>
           </div>
         </div>
 
         {/* Navigation Links */}
         <div className="p-4 space-y-1">
-          <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Research Navigation</p>
+          <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            Research Navigation
+          </p>
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+            const isActive = pathname === item.href || (item.href.startsWith("/dataset") && pathname === "/dataset");
             return (
               <Link
                 key={item.name}
