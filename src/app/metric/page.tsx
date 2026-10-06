@@ -1,90 +1,139 @@
 "use client";
 
-import { BarChart3 } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, BarChart3, TrendingUp, AlertTriangle, CheckCircle2 } from "lucide-react";
 
-export default function MetricDecompositionPage() {
+export default function MetricDecomposition() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 pb-20 p-8 max-w-5xl mx-auto space-y-10">
-      <section className="space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold">
-          <BarChart3 className="w-3.5 h-3.5" /> Part 2 Deliverable · Strategic Framework
+    <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
+      {/* Top Banner */}
+      <div className="bg-slate-900 text-white border-b border-slate-800 -mx-4 sm:-mx-8 lg:-mx-10 px-4 sm:px-8 lg:px-10 py-3">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-medium transition-colors">
+              <ArrowLeft className="w-3.5 h-3.5" /> Back to Discovery Engine
+            </Link>
+            <span className="text-slate-600">|</span>
+            <span className="text-slate-300">Metric Decomposition & Opportunity Scoring</span>
+          </div>
+          <span className="text-slate-400">Framework: <strong className="text-white">Episodic vs Semantic Recall</strong></span>
         </div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-slate-950">
-          Business Metric Decomposition
-        </h1>
-        <p className="text-sm text-slate-600 max-w-3xl leading-relaxed">
-          Deconstructing the core business objective: <em>"Increase the percentage of users who successfully retrieve a photo they remember but cannot precisely describe."</em>
-        </p>
-      </section>
-
-      {/* Core Formula Box */}
-      <div className="bg-slate-900 text-white rounded-2xl p-6 shadow-sm border border-slate-800 space-y-3">
-        <p className="text-xs font-bold uppercase tracking-wider text-blue-400">High-Level Mathematical Objective</p>
-        <div className="text-base md:text-lg font-mono bg-slate-950/80 p-4 rounded-xl border border-slate-800 text-blue-200">
-          VRSR = Σ(Sessions with Target Photo Confirmed) / Σ(Sessions Initiated with Incomplete Episodic Memory)
-        </div>
-        <p className="text-xs text-slate-400 leading-relaxed">
-          Successful retrieval: Photo opened, shared, or viewed &gt;10s without subsequent query reformulation or fallback to manual timeline scrolling.
-        </p>
       </div>
 
-      {/* 4-Stage Funnel */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-bold text-slate-900">4-Stage Retrieval Funnel &amp; Failure Modes</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-2">
+      <div className="max-w-6xl mx-auto pt-8 sm:pt-10 space-y-10">
+        {/* Header */}
+        <div className="space-y-3 max-w-3xl">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold">
+            <BarChart3 className="w-3.5 h-3.5" /> Quantitative Translation Layer
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-950">
+            Deconstructing the Search Retrieval Bottleneck
+          </h1>
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+            Evaluation of how keyword mismatch, missing OCR, and lack of autobiographical timeline indexing directly degrade search success and retention.
+          </p>
+        </div>
+
+        {/* Opportunity Score Formula Box */}
+        <div className="bg-white p-5 sm:p-7 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900">5-Factor Opportunity Scoring Formula</h2>
+          <div className="bg-slate-900 text-blue-300 p-4 rounded-xl text-xs sm:text-sm font-mono overflow-x-auto">
+            Score = (Prevalence × 0.35) + (Pain Severity × 0.30) + (Cross-Channel Agreement × 0.20) + (Addressability × 0.15)
+          </div>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            Prioritizes user pain points with high frequency and emotional severity, weighted by feasibility of AI implementation without requiring manual photo tagging.
+          </p>
+        </div>
+
+        {/* Metric Cards Grid (Responsive: 1 col on mobile, 3 cols on desktop) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full">Gate 1</span>
-              <span className="text-xs text-slate-400 font-semibold">Vocabulary Mismatch</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">Metric 01</span>
+              <TrendingUp className="w-4 h-4 text-blue-600" />
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">Query Formulation</h3>
+            <h3 className="text-base font-bold text-slate-900">Query Reformulation Rate</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Users describe visual vibes and settings ("blue dress at reception"). Search treats phrases as disjointed isolated nouns.
+              Percentage of search sessions where a user re-enters or modifies query nouns 3+ times before giving up or scrolling manually.
             </p>
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span className="text-slate-500">Benchmark Target:</span>
+              <strong className="text-emerald-600">&lt; 18% of sessions</strong>
+            </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-2">
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full">Gate 2</span>
-              <span className="text-xs text-rose-500 font-semibold">Primary Drop-off (41.2%)</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-rose-600">Metric 02</span>
+              <AlertTriangle className="w-4 h-4 text-rose-600" />
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">Semantic &amp; Temporal Parsing</h3>
+            <h3 className="text-base font-bold text-slate-900">Manual Timeline Fallback</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Users provide relative life-event clues ("autumn after college"). The engine demands strict EXIF calendar dates.
+              Frequency with which users abandon text search and resort to infinite timeline scrolling to find a known photo.
             </p>
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span className="text-slate-500">Benchmark Target:</span>
+              <strong className="text-emerald-600">&lt; 12% abandonment</strong>
+            </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-2">
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full">Gate 3</span>
-              <span className="text-xs text-slate-400 font-semibold">Semantic Noise (73% abandon)</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">Metric 03</span>
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">Candidate Ranking</h3>
+            <h3 className="text-base font-bold text-slate-900">Top-3 Precision at k (P@3)</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Returns hundreds of false positives (every blue shirt in the library), causing cognitive fatigue before thumbnail 12.
+              The target photo appears in the top 3 visible thumbnail results for ambiguous, sensory, or relational natural language queries.
             </p>
-          </div>
-
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full">Gate 4</span>
-              <span className="text-xs text-slate-400 font-semibold">Dead-End Refinement</span>
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span className="text-slate-500">Target Goal:</span>
+              <strong className="text-blue-600">&gt; 78% accuracy</strong>
             </div>
-            <h3 className="font-bold text-slate-900 text-sm">Evaluative Confirmation</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              No guided disambiguation chips. Users abandon Google Photos to search WhatsApp media tabs or give up entirely.
-            </p>
           </div>
         </div>
-      </section>
 
-      {/* Strategic Takeaway */}
-      <section className="bg-blue-50 border border-blue-200 rounded-2xl p-6 space-y-2">
-        <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wide">Core PM Conclusion</h3>
-        <p className="text-xs text-blue-800 leading-relaxed">
-          The highest-leverage opportunity lies in <strong>Gates 2 &amp; 3</strong>: enabling conversational multi-cue disambiguation so users can filter by vibe, lighting, and relative time without requiring exact calendar dates.
-        </p>
-      </section>
+        {/* Detailed Decomposition Table (Scrollable container for mobile) */}
+        <div className="bg-white p-5 sm:p-7 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div>
+            <h2 className="text-base sm:text-lg font-bold text-slate-900">Breakdown Across User Journeys</h2>
+            <p className="text-xs text-slate-500">How retrieval failure affects different photo intent categories.</p>
+          </div>
+
+          <div className="w-full overflow-x-auto rounded-xl border border-slate-200">
+            <table className="w-full text-left text-xs min-w-[560px]">
+              <thead className="bg-slate-50 text-slate-700 border-b border-slate-200 font-semibold">
+                <tr>
+                  <th className="p-3">Journey Archetype</th>
+                  <th className="p-3">Primary Anchor</th>
+                  <th className="p-3">Current Failure Mode</th>
+                  <th className="p-3">Proposed AI Mechanism</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 text-slate-600">
+                <tr>
+                  <td className="p-3 font-bold text-slate-900">Everyday / Social</td>
+                  <td className="p-3">Vibe, attire color, social circle</td>
+                  <td className="p-3">Isolated noun matching produces false positives</td>
+                  <td className="p-3 text-blue-600 font-medium">Multimodal CLIP embedding</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-bold text-slate-900">Utility / Physical Docs</td>
+                  <td className="p-3">Document shape, room context, urgency</td>
+                  <td className="p-3">Unindexed OCR text, drowned in camera roll</td>
+                  <td className="p-3 text-blue-600 font-medium">Automatic doc classifier & local OCR</td>
+                </tr>
+                <tr>
+                  <td className="p-3 font-bold text-slate-900">Milestone / Travel</td>
+                  <td className="p-3">Autobiographical era, season, companions</td>
+                  <td className="p-3">Rigid calendar filter requirements</td>
+                  <td className="p-3 text-blue-600 font-medium">Relational life-event timeline clusters</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
