@@ -24,8 +24,8 @@ export default function DiscoveryEngine() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
       {/* Top Banner */}
-      <div className="bg-slate-900 text-white border-b border-slate-800">
-        <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between text-xs">
+      <div className="bg-slate-900 text-white border-b border-slate-800 -mx-4 sm:-mx-8 lg:-mx-10 px-4 sm:px-8 lg:px-10 py-3">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-2">
             <span className="font-bold tracking-wider text-blue-400">RETRIEVAL LENS</span>
             <span className="text-slate-500">|</span>
@@ -38,22 +38,22 @@ export default function DiscoveryEngine() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 pt-10 space-y-12">
+      <div className="max-w-6xl mx-auto pt-8 sm:pt-10 space-y-10 sm:space-y-12">
         {/* Hero Section */}
         <section id="overview" className="space-y-4 max-w-4xl scroll-mt-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold">
             <Sparkles className="w-3.5 h-3.5" /> Discovery Engine · Public Signal Synthesis
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-950 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-950 leading-tight">
             Memory isn’t lost. <br />
             <span className="text-blue-600 font-serif italic font-normal">The translation layer is broken.</span>
           </h1>
-          <p className="text-base text-slate-600 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             Users don’t fail to find photos because their memories are blank. They recall vivid sensory anchors—lighting, companion dynamics, and life milestones. But Google Photos forces rigid noun tags and calendar dates, turning a rich mental memory into a failed keyword search.
           </p>
 
           {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-4">
             <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
               <p className="text-2xl font-bold text-slate-900">{corpusData.length}</p>
               <p className="text-xs text-slate-500 font-medium">Conversations Analysed</p>
@@ -74,7 +74,7 @@ export default function DiscoveryEngine() {
         </section>
 
         {/* Section 1: Methodology Pipeline */}
-        <section id="pipeline" className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm space-y-6 scroll-mt-6">
+        <section id="pipeline" className="bg-white p-5 sm:p-7 rounded-2xl border border-slate-200 shadow-sm space-y-6 scroll-mt-6">
           <div>
             <p className="text-xs font-bold text-blue-600 uppercase tracking-wider">Methodology</p>
             <h2 className="text-xl font-bold text-slate-900">Seven stages, not one sentiment pass</h2>
@@ -85,7 +85,15 @@ export default function DiscoveryEngine() {
 
           {/* Pipeline Steps */}
           <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
-            {["Public Sources", "Normalise", "Episodic Relevance", "Two-Pass Extraction", "Blocker Taxonomy", "Cross-Source Compare", "Opportunity Score"].map((step, idx) => (
+            {[
+              "Public Sources",
+              "Normalise",
+              "Episodic Relevance",
+              "Two-Pass Extraction",
+              "Blocker Taxonomy",
+              "Cross-Source Compare",
+              "Opportunity Score",
+            ].map((step, idx) => (
               <div key={step} className="flex items-center gap-2">
                 <span className="bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200">
                   {idx + 1}. {step}
@@ -95,9 +103,9 @@ export default function DiscoveryEngine() {
             ))}
           </div>
 
-          {/* Source Role Matrix */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs border border-slate-200 rounded-lg overflow-hidden">
+          {/* Source Role Matrix (Overflow container for mobile scrolling) */}
+          <div className="w-full overflow-x-auto rounded-xl border border-slate-200">
+            <table className="w-full text-left text-xs min-w-[580px]">
               <thead className="bg-slate-50 text-slate-700 border-b border-slate-200 font-semibold">
                 <tr>
                   <th className="p-3">Source Channel</th>
@@ -142,15 +150,18 @@ export default function DiscoveryEngine() {
             <p className="text-xs font-bold text-blue-600 uppercase tracking-wider">Opportunity Ranking</p>
             <h2 className="text-2xl font-bold text-slate-900">Prioritizing What Can Actually Be Solved</h2>
             <p className="text-xs text-slate-500 mt-1 max-w-3xl">
-              Ranked by a 5-factor scoring model: Prevalence $\times$ Pain Severity $\times$ Multi-Source Corroboration $\times$ Product Addressability without manual file tagging.
+              Ranked by a 5-factor scoring model: Prevalence × Pain Severity × Multi-Source Corroboration × Product Addressability without manual file tagging.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white border-2 border-blue-500 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+            {/* Rank 1 */}
+            <div className="bg-white border-2 border-blue-500 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">Rank 1 · Highest Leverage</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">
+                    Rank 1 · Highest Leverage
+                  </span>
                   <span className="text-xl font-extrabold text-blue-700">5.42</span>
                 </div>
                 <h3 className="text-lg font-bold text-slate-900">Bridge Episodic-Semantic Disconnect</h3>
@@ -165,14 +176,17 @@ export default function DiscoveryEngine() {
                 </div>
               </div>
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-[11px] text-slate-700 italic">
-                “Google only understands static tags like 'jacket', but memory is relative to who I was with and the vibe.”
+                “Google only understands static tags like &apos;jacket&apos;, but memory is relative to who I was with and the vibe.”
               </div>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+            {/* Rank 2 */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">Rank 2 · Critical Utility</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
+                    Rank 2 · Critical Utility
+                  </span>
                   <span className="text-xl font-extrabold text-slate-800">5.10</span>
                 </div>
                 <h3 className="text-lg font-bold text-slate-900">High-Urgency Physical & Utility Docs</h3>
@@ -187,14 +201,17 @@ export default function DiscoveryEngine() {
                 </div>
               </div>
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-[11px] text-slate-700 italic">
-                “Took a photo of the paint code sticker inside my car door. Searching 'paint' shows 500 exterior car shots.”
+                “Took a photo of the paint code sticker inside my car door. Searching &apos;paint&apos; shows 500 exterior car shots.”
               </div>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+            {/* Rank 3 */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">Rank 3 · Temporal Gap</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
+                    Rank 3 · Temporal Gap
+                  </span>
                   <span className="text-xl font-extrabold text-slate-800">4.65</span>
                 </div>
                 <h3 className="text-lg font-bold text-slate-900">Life-Milestone Relational Timelines</h3>
@@ -209,7 +226,7 @@ export default function DiscoveryEngine() {
                 </div>
               </div>
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-[11px] text-slate-700 italic">
-                “Why can't I search 'around the time I bought my car'? I have no idea if it was 2022 or 2023.”
+                “Why can&apos;t I search &apos;around the time I bought my car&apos;? I have no idea if it was 2022 or 2023.”
               </div>
             </div>
           </div>
@@ -255,10 +272,12 @@ export default function DiscoveryEngine() {
           {/* Filtered Evidence Cards */}
           <div className="space-y-3 pt-2">
             {filteredItems.map((item: any) => (
-              <div key={item.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
-                <div className="flex items-center justify-between text-xs">
+              <div key={item.id} className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md">{item.category}</span>
+                    <span className="font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md">
+                      {item.category}
+                    </span>
                     <span className="font-medium text-slate-700">{item.theme}</span>
                   </div>
                   <span className="text-slate-400">{item.source} · {item.date}</span>
