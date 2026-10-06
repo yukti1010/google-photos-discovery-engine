@@ -1,12 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles, BarChart3, Search, Layers, CheckCircle2, Compass } from "lucide-react";
+import {
+  Sparkles,
+  BarChart3,
+  Search,
+  Layers,
+  Compass,
+  CheckCircle2,
+  Menu,
+  X,
+} from "lucide-react";
 import corpusData from "@/data/corpus.json";
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
     { name: "Overview & Synthesis", href: "/dataset#overview", icon: Sparkles },
@@ -19,65 +30,92 @@ export default function Sidebar() {
   const uniqueSources = Array.from(new Set(corpusData.map((i: any) => i.source)));
 
   return (
-    <aside className="w-64 bg-slate-900 text-white border-r border-slate-800 flex flex-col justify-between h-screen sticky top-0 shrink-0">
-      <div>
-        {/* Brand Header */}
-        <div className="p-6 border-b border-slate-800/80">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-black text-white text-base">
-              R
+    <>
+      {/* Mobile Floating Menu Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle navigation"
+        className="lg:hidden fixed top-3 left-3 z-50 p-2 rounded-xl bg-slate-900 text-white border border-slate-700 shadow-md hover:bg-slate-800 transition-colors"
+      >
+        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+      </button>
+
+      {/* Mobile Backdrop (closes sidebar on tap outside) */}
+      {isOpen && (
+        <div
+          onClick={() => setIsOpen(false)}
+          className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity"
+        />
+      )}
+
+      {/* Sidebar Drawer */}
+      <aside
+        className={`fixed lg:sticky top-0 left-0 z-40 w-64 bg-slate-900 text-white border-r border-slate-800 flex flex-col justify-between h-screen shrink-0 transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+      >
+        <div>
+          {/* Brand Header */}
+          <div className="p-6 border-b border-slate-800/80">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-black text-white text-base">
+                R
+              </div>
+              <div>
+                <span className="font-extrabold tracking-tight text-white text-base">
+                  Retrieval<span className="text-blue-400 italic">Lens</span>
+                </span>
+                <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">
+                  Google Photos PM Intelligence
+                </p>
+              </div>
             </div>
-            <div>
-              <span className="font-extrabold tracking-tight text-white text-base">
-                Retrieval<span className="text-blue-400 italic">Lens</span>
-              </span>
-              <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">
-                Google Photos PM Intelligence
-              </p>
-            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="p-4 space-y-1">
+            <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+              Research Navigation
+            </p>
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href;
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                    isActive
+                      ? "text-blue-400 bg-blue-500/10"
+                      : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+                  }`}
+                >
+                  <Icon className={`w-4 h-4 ${isActive ? "text-blue-400" : "text-slate-400"}`} />
+                  <span>{item.name}</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
 
-        {/* Navigation Links */}
-        <div className="p-4 space-y-1">
-          <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Research Navigation
-          </p>
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname === item.href;
-            return (
-              <Link
-  href={item.href}
-  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
-    isActive 
-      ? "text-blue-400 bg-blue-500/10" 
-      : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-  }`}
->
-                <Icon className={`w-4 h-4 ${isActive ? "text-blue-400" : "text-slate-400"}`} />
-                {item.name}
-              </Link>
-            );
-          })}
+        {/* Dataset Live Footnote */}
+        <div className="p-4 m-4 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs space-y-2">
+          <div className="flex items-center justify-between text-slate-400 text-[11px] font-medium">
+            <span>Corpus Volume</span>
+            <span className="text-white font-bold">{corpusData.length} records</span>
+          </div>
+          <div className="flex items-center justify-between text-slate-400 text-[11px] font-medium">
+            <span>Validated Sources</span>
+            <span className="text-white font-bold">{uniqueSources.length} channels</span>
+          </div>
+          <div className="pt-2 border-t border-slate-700/60 flex items-center gap-1.5 text-[10px] text-blue-400 font-medium">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Part 1 Deliverable Live</span>
+          </div>
         </div>
-      </div>
-
-      {/* Dataset Footnote Card */}
-      <div className="p-4 m-4 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs space-y-2">
-        <div className="flex items-center justify-between text-slate-400 text-[11px] font-medium">
-          <span>Corpus Volume</span>
-          <span className="text-white font-bold">{corpusData.length} records</span>
-        </div>
-        <div className="flex items-center justify-between text-slate-400 text-[11px] font-medium">
-          <span>Validated Sources</span>
-          <span className="text-white font-bold">{uniqueSources.length} channels</span>
-        </div>
-        <div className="pt-2 border-t border-slate-700/60 flex items-center gap-1.5 text-[10px] text-blue-400 font-medium">
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Part 1 Deliverable Live</span>
-        </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }
