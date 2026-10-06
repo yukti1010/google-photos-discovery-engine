@@ -45,7 +45,7 @@ export default function Sidebar() {
           </p>
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href || (item.href.startsWith("/dataset") && pathname === "/dataset");
+            const isActive = pathname === item.href;
             return (
               <Link
                 key={item.name}
